@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>マイクラ エンティティID辞典</title>
+
+<style>
+body {
+  font-family: sans-serif;
+  background: #111;
+  color: #fff;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: none;
+}
+
+.card {
+  background: #222;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+button {
+  margin-top: 8px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎮 マイクラ エンティティID辞典</h1>
+
+<input type="text" id="search" placeholder="モブ名を検索（例：zombie）">
+
+<div id="list"></div>
+
+<script>
+// ===== データ =====
+const data = [
+  { name: "Zombie", id: "minecraft:zombie", cmd: "/summon minecraft:zombie" },
+  { name: "Creeper", id: "minecraft:creeper", cmd: "/summon minecraft:creeper" },
+  { name: "Skeleton", id: "minecraft:skeleton", cmd: "/summon minecraft:skeleton" },
+  { name: "Warden", id: "minecraft:warden", cmd: "/summon minecraft:warden" },
+  { name: "Cow", id: "minecraft:cow", cmd: "/summon minecraft:cow" },
+  { name: "Pig", id: "minecraft:pig", cmd: "/summon minecraft:pig" }
+];
+
+// ===== 表示関数 =====
+function render(list) {
+  const container = document.getElementById("list");
+  container.innerHTML = "";
+
+  list.forEach(e => {
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <h3>${e.name}</h3>
+      <p>ID: ${e.id}</p>
+      <code>${e.cmd}</code><br>
+      <button onclick="copy('${e.cmd}')">コマンドコピー</button>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+// ===== コピー機能 =====
+function copy(text) {
+  navigator.clipboard.writeText(text);
+  alert("コピーしたよ！");
+}
+
+// ===== 検索 =====
+document.getElementById("search").addEventListener("input", function() {
+  const q = this.value.toLowerCase();
+  const filtered = data.filter(e =>
+    e.name.toLowerCase().includes(q) ||
+    e.id.toLowerCase().includes(q)
+  );
+  render(filtered);
+});
+
+// 初期表示
+render(data);
+</script>
+
+</body>
+</html>
