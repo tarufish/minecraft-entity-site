@@ -61,7 +61,191 @@ body.light .guide code{
     background:#e5e7eb;
     color:#2563eb;
 }
-    
+/* ===== 背景アニメーション ===== */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at top left,
+    rgba(59,130,246,0.15),
+    transparent 30%),
+
+    radial-gradient(circle at bottom right,
+    rgba(99,102,241,0.15),
+    transparent 30%);
+
+    animation:bgMove 10s infinite alternate ease-in-out;
+
+    z-index:-1;
+
+}
+
+@keyframes bgMove{
+
+    from{
+        transform:scale(1) translateY(0px);
+    }
+
+    to{
+        transform:scale(1.1) translateY(-20px);
+    }
+
+}
+
+/* ===== カード光る ===== */
+
+.card{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120%;
+
+    left:-120%;
+
+    width:250%;
+
+    height:250%;
+
+    background:
+    linear-gradient(
+    45deg,
+    transparent,
+    rgba(255,255,255,0.06),
+    transparent);
+
+    transform:rotate(25deg);
+
+    transition:0.8s;
+
+}
+
+.card:hover::before{
+
+    top:100%;
+    left:100%;
+
+}
+
+/* ===== タイトルアニメ ===== */
+
+header{
+
+    animation:headerGlow 3s infinite alternate;
+
+}
+
+@keyframes headerGlow{
+
+    from{
+        box-shadow:
+        0 0 10px rgba(59,130,246,0.25);
+    }
+
+    to{
+        box-shadow:
+        0 0 25px rgba(59,130,246,0.55);
+    }
+
+}
+
+/* ===== 入力欄ネオン ===== */
+
+input:focus{
+
+    box-shadow:
+    0 0 15px rgba(59,130,246,0.5);
+
+}
+
+/* ===== ボタンぷにぷに ===== */
+
+.copyBtn:active,
+.tab:active,
+#topBtn:active,
+#themeToggle:active{
+
+    transform:scale(0.92);
+
+}
+
+/* ===== スクロール出現 ===== */
+
+.card{
+
+    animation:
+    fadeUp 0.4s ease,
+    floatCard 4s ease-in-out infinite;
+
+}
+
+@keyframes floatCard{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-2px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+/* ===== タブ光る ===== */
+
+.active{
+
+    box-shadow:
+    0 0 15px rgba(59,130,246,0.5);
+
+}
+
+/* ===== IDネオン ===== */
+
+.id{
+
+    text-shadow:
+    0 0 8px rgba(59,130,246,0.6);
+
+}
+
+/* ===== スクロールバー ===== */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#111827;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#3b82f6;
+    border-radius:999px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#60a5fa;
+}
 
 input{
     width:100%;
