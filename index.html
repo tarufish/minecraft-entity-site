@@ -334,26 +334,19 @@ const data = [
 
 let currentEdition = "all";
 
-function createCard(e){
+function createCard(e){function copyCommand(text, btn){
 
-    return `
-    <div class="card">
+    const id = text.replace('/summon ','');
+    
+    navigator.clipboard.writeText(id);
 
-        <div class="mob">${e.name}</div>
+    btn.innerHTML = "✅";
 
-        <div class="jp">${e.jp}</div>
+    setTimeout(()=>{
+        btn.innerHTML = "📋 IDコピー";
+    },1200);
 
-        <div>${e.edition}</div>
-
-        <div class="id">${e.id}</div>
-
-        <button class="copyBtn"
-        onclick="copyCommand('/summon ${e.id}', this)">
-        📋 IDコピー
-        </button>
-
-    </div>
-    `;
+}
 }
 
 function render(){
