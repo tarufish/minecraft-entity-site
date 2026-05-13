@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>マイクラ エンティティID辞典</title>
 
 <style>
+
 body{
     margin:0;
     background:#0f1115;
@@ -51,6 +53,7 @@ input{
     color:white;
     font-size:18px;
     margin-bottom:20px;
+    box-sizing:border-box;
 }
 
 .tabs{
@@ -68,6 +71,11 @@ input{
     color:white;
     cursor:pointer;
     font-size:16px;
+    transition:0.2s;
+}
+
+.tab:hover{
+    transform:translateY(-2px);
 }
 
 .active{
@@ -75,7 +83,7 @@ input{
 }
 
 .section-title{
-    margin-top:30px;
+    margin-top:35px;
     margin-bottom:15px;
     font-size:28px;
 }
@@ -91,12 +99,13 @@ input{
     padding:16px;
     border-radius:14px;
     border:1px solid transparent;
-    transition:0.2s;
+    transition:0.25s;
 }
 
 .card:hover{
     border-color:#3b82f6;
-    transform:translateY(-4px);
+    transform:translateY(-5px) scale(1.02);
+    box-shadow:0 10px 25px rgba(0,0,0,0.35);
 }
 
 .mob{
@@ -111,24 +120,65 @@ input{
 
 .id{
     color:#8ab4ff;
-    margin-bottom:12px;
+    margin-bottom:14px;
     font-family:monospace;
+    font-size:18px;
 }
 
-button{
+.copyBtn{
     width:100%;
-    padding:10px;
+    padding:11px;
     border:none;
-    border-radius:8px;
+    border-radius:10px;
     background:#3b82f6;
     color:white;
     cursor:pointer;
     font-size:15px;
+    transition:0.2s;
 }
 
-button:hover{
-    opacity:0.9;
+.copyBtn:hover{
+    transform:scale(1.03);
 }
+
+#topBtn{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+
+    width:58px;
+    height:58px;
+
+    border:none;
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    color:white;
+
+    font-size:24px;
+    cursor:pointer;
+
+    box-shadow:0 5px 20px rgba(59,130,246,0.5);
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:
+        transform 0.25s,
+        opacity 0.25s,
+        box-shadow 0.25s;
+}
+
+#topBtn.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+#topBtn:hover{
+    transform:translateY(-5px) scale(1.08);
+    box-shadow:0 10px 25px rgba(59,130,246,0.7);
+}
+
 </style>
 </head>
 
@@ -142,20 +192,36 @@ button:hover{
 
 <div class="guide">
 <h2>📖 召喚方法</h2>
+
 <p>
-チャット欄で <code>/summon ID</code> を入力するとモブを召喚できます。<br>
-例：<br>
-<code>/summon zombie</code><br>
-<code>/summon warden</code>
+チャット欄で <code>/summon ID</code> を入力するとモブを召喚できます。
 </p>
+
+<p>
+例：
+</p>
+
+<code>/summon zombie</code><br><br>
+<code>/summon warden</code>
+
 </div>
 
 <input type="text" id="search" placeholder="モブ検索（例：ゾンビ、warden、creeper）">
 
 <div class="tabs">
-    <button class="tab active" onclick="changeEdition('all', this)">全部</button>
-    <button class="tab" onclick="changeEdition('Java', this)">Java版</button>
-    <button class="tab" onclick="changeEdition('統合版', this)">統合版</button>
+
+<button class="tab active" onclick="changeEdition('all', this)">
+全部
+</button>
+
+<button class="tab" onclick="changeEdition('Java', this)">
+Java版
+</button>
+
+<button class="tab" onclick="changeEdition('統合版', this)">
+統合版
+</button>
+
 </div>
 
 <h2 class="section-title">😈 敵対モブ</h2>
@@ -166,11 +232,11 @@ button:hover{
 
 </div>
 
+<button id="topBtn" onclick="scrollToTop()">⬆</button>
+
 <script>
 
 const data = [
-
-// ===== 敵対モブ =====
 
 {type:"hostile",edition:"Java",name:"Zombie",jp:"ゾンビ",id:"zombie"},
 {type:"hostile",edition:"Java",name:"Creeper",jp:"クリーパー",id:"creeper"},
@@ -193,8 +259,6 @@ const data = [
 {type:"hostile",edition:"Java",name:"Pillager",jp:"ピリジャー",id:"pillager"},
 {type:"hostile",edition:"Java",name:"Ravager",jp:"ラヴェジャー",id:"ravager"},
 
-// ===== 友好モブ =====
-
 {type:"friendly",edition:"Java",name:"Cow",jp:"ウシ",id:"cow"},
 {type:"friendly",edition:"Java",name:"Pig",jp:"ブタ",id:"pig"},
 {type:"friendly",edition:"Java",name:"Sheep",jp:"ヒツジ",id:"sheep"},
@@ -210,8 +274,6 @@ const data = [
 {type:"friendly",edition:"Java",name:"Bee",jp:"ハチ",id:"bee"},
 {type:"friendly",edition:"Java",name:"Fox",jp:"キツネ",id:"fox"},
 {type:"friendly",edition:"Java",name:"Frog",jp:"カエル",id:"frog"},
-
-// ===== 統合版 =====
 
 {type:"hostile",edition:"統合版",name:"Zombie",jp:"ゾンビ",id:"zombie"},
 {type:"hostile",edition:"統合版",name:"Creeper",jp:"クリーパー",id:"creeper"},
@@ -235,11 +297,20 @@ function createCard(e){
 
     return `
     <div class="card">
+
         <div class="mob">${e.name}</div>
+
         <div class="jp">${e.jp}</div>
+
         <div>${e.edition}</div>
+
         <div class="id">${e.id}</div>
-        <button onclick="copyCommand('/summon ${e.id}', this)">📋 IDコピー</button>
+
+        <button class="copyBtn"
+        onclick="copyCommand('/summon ${e.id}', this)">
+        📋 IDコピー
+        </button>
+
     </div>
     `;
 }
@@ -252,7 +323,10 @@ function render(){
     hostile.innerHTML = "";
     friendly.innerHTML = "";
 
-    const search = document.getElementById("search").value.toLowerCase();
+    const search =
+    document.getElementById("search")
+    .value
+    .toLowerCase();
 
     data.forEach(e=>{
 
@@ -281,33 +355,57 @@ function render(){
 }
 
 function copyCommand(text, btn){
+
     navigator.clipboard.writeText(text);
 
-    const original = btn.innerHTML;
-
-    btn.innerHTML = '✅ コピー済み';
+    btn.innerHTML = "✅";
 
     setTimeout(()=>{
-        btn.innerHTML = original;
-    },1500);
+        btn.innerHTML = "📋 IDコピー";
+    },1200);
+
 }
 
 function changeEdition(edition,btn){
 
     currentEdition = edition;
 
-    document.querySelectorAll('.tab').forEach(t=>{
-        t.classList.remove('active');
+    document.querySelectorAll(".tab").forEach(t=>{
+        t.classList.remove("active");
     });
 
-    btn.classList.add('active');
+    btn.classList.add("active");
 
     render();
 }
 
-document.getElementById("search").addEventListener("input",render);
+document
+.getElementById("search")
+.addEventListener("input",render);
 
 render();
+
+const topBtn = document.getElementById("topBtn");
+
+window.addEventListener("scroll",()=>{
+
+    if(window.scrollY > 300){
+        topBtn.classList.add("show");
+    }
+    else{
+        topBtn.classList.remove("show");
+    }
+
+});
+
+function scrollToTop(){
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
 
 </script>
 
