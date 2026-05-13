@@ -239,7 +239,7 @@ function createCard(e){
         <div class="jp">${e.jp}</div>
         <div>${e.edition}</div>
         <div class="id">${e.id}</div>
-        <button onclick="copyCommand('/summon ${e.id}')">📋 コードコピー</button>
+        <button onclick="copyCommand('/summon ${e.id}', this)">📋 IDコピー</button>
     </div>
     `;
 }
@@ -280,9 +280,16 @@ function render(){
 
 }
 
-function copyCommand(text){
+function copyCommand(text, btn){
     navigator.clipboard.writeText(text);
-    alert("コードをコピーしたよ！");
+
+    const original = btn.innerHTML;
+
+    btn.innerHTML = '✅ コピー済み';
+
+    setTimeout(()=>{
+        btn.innerHTML = original;
+    },1500);
 }
 
 function changeEdition(edition,btn){
