@@ -2,103 +2,260 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>マイクラ エンティティID辞典</title>
 
 <style>
-body {
-  font-family: sans-serif;
-  background: #111;
-  color: #fff;
-  padding: 20px;
+body{
+    margin:0;
+    font-family:sans-serif;
+    background:#0f1115;
+    color:white;
 }
 
-h1 {
-  text-align: center;
+header{
+    background:#181c24;
+    padding:20px;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    box-shadow:0 2px 10px rgba(0,0,0,0.4);
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 18px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  border: none;
+.container{
+    padding:20px;
+    max-width:1000px;
+    margin:auto;
 }
 
-.card {
-  background: #222;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 10px;
+input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:18px;
+    margin-bottom:20px;
+    background:#1f2633;
+    color:white;
 }
 
-button {
-  margin-top: 8px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+.tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.tab{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    background:#222a38;
+    color:white;
+    transition:0.2s;
+}
+
+.tab:hover{
+    transform:scale(1.03);
+}
+
+.active{
+    background:#3b82f6;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:#1a1f29;
+    padding:16px;
+    border-radius:14px;
+    transition:0.2s;
+    border:1px solid transparent;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    border-color:#3b82f6;
+}
+
+.mob{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.id{
+    color:#8ab4ff;
+    margin-bottom:8px;
+}
+
+.cmd{
+    background:#11151d;
+    padding:10px;
+    border-radius:8px;
+    font-family:monospace;
+    word-break:break-all;
+    margin-bottom:10px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#3b82f6;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+.edition{
+    font-size:13px;
+    color:#aaa;
+    margin-bottom:10px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎮 マイクラ エンティティID辞典</h1>
+<header>
+🎮 マイクラ エンティティID辞典
+</header>
 
-<input type="text" id="search" placeholder="モブ名を検索（例：zombie）">
+<div class="container">
 
-<div id="list"></div>
+<input type="text" id="search" placeholder="モブ検索（例：zombie、warden、ゾンビ）">
+
+<div class="tabs">
+    <button class="tab active" onclick="changeEdition('all', this)">全部</button>
+    <button class="tab" onclick="changeEdition('Java', this)">Java版</button>
+    <button class="tab" onclick="changeEdition('統合版', this)">統合版</button>
+</div>
+
+<div class="grid" id="list"></div>
+
+</div>
 
 <script>
-// ===== データ =====
+
 const data = [
-  { name: "Zombie", id: "minecraft:zombie", cmd: "/summon minecraft:zombie" },
-  { name: "Creeper", id: "minecraft:creeper", cmd: "/summon minecraft:creeper" },
-  { name: "Skeleton", id: "minecraft:skeleton", cmd: "/summon minecraft:skeleton" },
-  { name: "Warden", id: "minecraft:warden", cmd: "/summon minecraft:warden" },
-  { name: "Cow", id: "minecraft:cow", cmd: "/summon minecraft:cow" },
-  { name: "Pig", id: "minecraft:pig", cmd: "/summon minecraft:pig" }
+
+    // Java
+    {edition:"Java",name:"Zombie",jp:"ゾンビ",id:"zombie"},
+    {edition:"Java",name:"Creeper",jp:"クリーパー",id:"creeper"},
+    {edition:"Java",name:"Skeleton",jp:"スケルトン",id:"skeleton"},
+    {edition:"Java",name:"Spider",jp:"クモ",id:"spider"},
+    {edition:"Java",name:"Enderman",jp:"エンダーマン",id:"enderman"},
+    {edition:"Java",name:"Witch",jp:"ウィッチ",id:"witch"},
+    {edition:"Java",name:"Slime",jp:"スライム",id:"slime"},
+    {edition:"Java",name:"Blaze",jp:"ブレイズ",id:"blaze"},
+    {edition:"Java",name:"Ghast",jp:"ガスト",id:"ghast"},
+    {edition:"Java",name:"Warden",jp:"ウォーデン",id:"warden"},
+    {edition:"Java",name:"Wither",jp:"ウィザー",id:"wither"},
+    {edition:"Java",name:"Ender Dragon",jp:"エンダードラゴン",id:"ender_dragon"},
+    {edition:"Java",name:"Cow",jp:"ウシ",id:"cow"},
+    {edition:"Java",name:"Pig",jp:"ブタ",id:"pig"},
+    {edition:"Java",name:"Sheep",jp:"ヒツジ",id:"sheep"},
+    {edition:"Java",name:"Chicken",jp:"ニワトリ",id:"chicken"},
+
+    // 統合版
+    {edition:"統合版",name:"Zombie",jp:"ゾンビ",id:"zombie"},
+    {edition:"統合版",name:"Creeper",jp:"クリーパー",id:"creeper"},
+    {edition:"統合版",name:"Skeleton",jp:"スケルトン",id:"skeleton"},
+    {edition:"統合版",name:"Spider",jp:"クモ",id:"spider"},
+    {edition:"統合版",name:"Enderman",jp:"エンダーマン",id:"enderman"},
+    {edition:"統合版",name:"Witch",jp:"ウィッチ",id:"witch"},
+    {edition:"統合版",name:"Slime",jp:"スライム",id:"slime"},
+    {edition:"統合版",name:"Blaze",jp:"ブレイズ",id:"blaze"},
+    {edition:"統合版",name:"Ghast",jp:"ガスト",id:"ghast"},
+    {edition:"統合版",name:"Warden",jp:"ウォーデン",id:"warden"},
+    {edition:"統合版",name:"Wither",jp:"ウィザー",id:"wither"},
+    {edition:"統合版",name:"Ender Dragon",jp:"エンダードラゴン",id:"ender_dragon"},
+    {edition:"統合版",name:"Cow",jp:"ウシ",id:"cow"},
+    {edition:"統合版",name:"Pig",jp:"ブタ",id:"pig"},
+    {edition:"統合版",name:"Sheep",jp:"ヒツジ",id:"sheep"},
+    {edition:"統合版",name:"Chicken",jp:"ニワトリ",id:"chicken"}
+
 ];
 
-// ===== 表示関数 =====
-function render(list) {
-  const container = document.getElementById("list");
-  container.innerHTML = "";
+let currentEdition = "all";
 
-  list.forEach(e => {
-    const div = document.createElement("div");
-    div.className = "card";
+function render(){
 
-    div.innerHTML = `
-      <h3>${e.name}</h3>
-      <p>ID: ${e.id}</p>
-      <code>${e.cmd}</code><br>
-      <button onclick="copy('${e.cmd}')">コマンドコピー</button>
-    `;
+    const list = document.getElementById("list");
+    const search = document.getElementById("search").value.toLowerCase();
 
-    container.appendChild(div);
-  });
+    list.innerHTML = "";
+
+    const filtered = data.filter(e => {
+
+        const matchEdition =
+            currentEdition === "all" ||
+            e.edition === currentEdition;
+
+        const matchSearch =
+            e.name.toLowerCase().includes(search) ||
+            e.jp.includes(search) ||
+            e.id.includes(search);
+
+        return matchEdition && matchSearch;
+    });
+
+    filtered.forEach(e => {
+
+        const cmd = `/summon ${e.id}`;
+
+        const div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+            <div class="mob">${e.name}</div>
+            <div>${e.jp}</div>
+            <div class="edition">${e.edition}</div>
+            <div class="id">ID: ${e.id}</div>
+            <div class="cmd">${cmd}</div>
+            <button onclick="copyCmd('${cmd}')">📋 コピー</button>
+        `;
+
+        list.appendChild(div);
+
+    });
+
 }
 
-// ===== コピー機能 =====
-function copy(text) {
-  navigator.clipboard.writeText(text);
-  alert("コピーしたよ！");
+function copyCmd(text){
+    navigator.clipboard.writeText(text);
+    alert("コピーしたよ！");
 }
 
-// ===== 検索 =====
-document.getElementById("search").addEventListener("input", function() {
-  const q = this.value.toLowerCase();
-  const filtered = data.filter(e =>
-    e.name.toLowerCase().includes(q) ||
-    e.id.toLowerCase().includes(q)
-  );
-  render(filtered);
-});
+function changeEdition(edition,btn){
 
-// 初期表示
-render(data);
+    currentEdition = edition;
+
+    document.querySelectorAll(".tab").forEach(t=>{
+        t.classList.remove("active");
+    });
+
+    btn.classList.add("active");
+
+    render();
+}
+
+document.getElementById("search").addEventListener("input",render);
+
+render();
+
 </script>
 
 </body>
