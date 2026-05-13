@@ -1,6 +1,3 @@
-# index.html の中身をこれに全部置き換えてください
-
-```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -242,7 +239,7 @@ function createCard(e){
         <div class="jp">${e.jp}</div>
         <div>${e.edition}</div>
         <div class="id">${e.id}</div>
-        <button onclick="copyId('${e.id}')">📋 IDコピー</button>
+        <button onclick="copyCommand('/summon ${e.id}')">📋 コードコピー</button>
     </div>
     `;
 }
@@ -283,9 +280,9 @@ function render(){
 
 }
 
-function copyId(text){
+function copyCommand(text){
     navigator.clipboard.writeText(text);
-    alert("IDをコピーしたよ！");
+    alert("コードをコピーしたよ！");
 }
 
 function changeEdition(edition,btn){
