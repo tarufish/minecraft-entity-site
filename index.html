@@ -11,322 +11,283 @@
 <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/minecraft-4">
 
 <style>
-<style>
 
-/* ===== 完全ホワイトモード修正版 ===== */
-
-body.light{
-
-    background:#f3f5fa !important;
-    color:#111 !important;
-
+body{
+margin:0;
+background:#0f1115;
+color:white;
+font-family:Arial,sans-serif;
+overflow-x:hidden;
+transition:0.3s;
 }
 
-/* header */
-
-body.light header{
-
-    background:white !important;
-    color:#111 !important;
-
+header{
+background:#181c24;
+padding:25px;
+text-align:center;
+font-size:30px;
+font-weight:bold;
+position:sticky;
+top:0;
+z-index:999;
 }
 
-/* guide */
-
-body.light .guide{
-
-    background:white !important;
-    color:#111 !important;
-
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
 }
 
-/* summon code */
-
-body.light .guide code,
-body.light code{
-
-    background:#e5e7eb !important;
-    color:#2563eb !important;
-
+.guide{
+background:#1b2230;
+padding:20px;
+border-radius:18px;
+margin-bottom:20px;
 }
 
-/* cards */
-
-body.light .card{
-
-    background:white !important;
-    color:#111 !important;
-
+.guide code{
+background:#0f1115;
+padding:5px 10px;
+border-radius:8px;
+color:#3b82f6;
 }
 
-/* AI */
-
-body.light .aiBox{
-
-    background:white !important;
-    color:#111 !important;
-
+input{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#1f2633;
+color:white;
+font-size:18px;
+margin-bottom:20px;
+box-sizing:border-box;
 }
 
-body.light #chat{
-
-    background:#f3f4f6 !important;
-    color:#111 !important;
-
+.tabs{
+display:flex;
+gap:10px;
+margin-bottom:25px;
 }
 
-body.light .ai{
-
-    background:#e5e7eb !important;
-    color:#111 !important;
-
+.tab{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:#222a38;
+color:white;
+cursor:pointer;
 }
 
-body.light .user{
-
-    color:white !important;
-
+.active{
+background:#3b82f6;
 }
 
-/* text */
-
-body.light .section-title,
-body.light h1,
-body.light h2,
-body.light h3,
-body.light p,
-body.light span,
-body.light div{
-
-    color:#111 !important;
-
+.section-title{
+font-size:32px;
+margin-top:40px;
+margin-bottom:20px;
 }
 
-/* sub text */
-
-body.light .jp{
-
-    color:#555 !important;
-
+.grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+gap:18px;
 }
 
-/* blue text */
-
-body.light .edition,
-body.light .id{
-
-    color:#2563eb !important;
-
+.card{
+background:#1a1f29;
+padding:18px;
+border-radius:18px;
+transition:0.25s;
 }
 
-/* inputs */
-
-body.light input{
-
-    background:white !important;
-    color:#111 !important;
-    border:1px solid #ccc !important;
-
+.card:hover{
+transform:translateY(-5px);
 }
 
-/* tabs */
-
-body.light .tab{
-
-    background:white !important;
-    color:#111 !important;
-    border:1px solid #ccc !important;
-
+.mob{
+font-size:24px;
+margin-bottom:10px;
+font-weight:bold;
 }
 
-body.light .active{
-
-    background:#3b82f6 !important;
-    color:white !important;
-
+.jp{
+color:#aaa;
+margin-bottom:10px;
 }
 
-/* buttons */
-
-body.light button{
-
-    color:white;
-
+.edition{
+color:#60a5fa;
+margin-bottom:10px;
 }
 
-/* scrollbar */
-
-body.light ::-webkit-scrollbar-track{
-
-    background:#e5e7eb;
-
+.id{
+color:#3b82f6;
+margin-bottom:15px;
 }
 
-body.light ::-webkit-scrollbar-thumb{
-
-    background:#3b82f6;
-
-}
-
-</style>
-<style>
-
-/* ===== 完全ホワイトモード修正版 ===== */
-
-body.light{
-
-    background:#f3f5fa !important;
-    color:#111 !important;
-
-}
-
-/* header */
-
-body.light header{
-
-    background:white !important;
-    color:#111 !important;
-
-}
-
-/* guide */
-
-body.light .guide{
-
-    background:white !important;
-    color:#111 !important;
-
-}
-
-/* summon code */
-
-body.light .guide code,
-body.light code{
-
-    background:#e5e7eb !important;
-    color:#2563eb !important;
-
-}
-
-/* cards */
-
-body.light .card{
-
-    background:white !important;
-    color:#111 !important;
-
+.copyBtn{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#3b82f6;
+color:white;
+cursor:pointer;
 }
 
 /* AI */
 
+#openAiBtn{
+position:fixed;
+left:20px;
+bottom:90px;
+width:60px;
+height:60px;
+border:none;
+border-radius:50%;
+background:#8b5cf6;
+color:white;
+font-size:24px;
+cursor:pointer;
+z-index:9999;
+}
+
+.aiBox{
+position:fixed;
+right:-420px;
+top:0;
+width:400px;
+height:100vh;
+background:#111827;
+padding:20px;
+transition:0.35s;
+z-index:9998;
+overflow:auto;
+}
+
+.aiBox.open{
+right:0;
+}
+
+#chat{
+height:60vh;
+overflow:auto;
+background:#1f2937;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.message{
+padding:12px;
+border-radius:12px;
+margin-bottom:12px;
+}
+
+.user{
+background:#2563eb;
+}
+
+.ai{
+background:#374151;
+}
+
+.aiBox button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#3b82f6;
+color:white;
+margin-top:10px;
+}
+
+/* top */
+
+#topBtn{
+position:fixed;
+right:20px;
+bottom:20px;
+width:58px;
+height:58px;
+border:none;
+border-radius:50%;
+background:#2563eb;
+color:white;
+font-size:24px;
+cursor:pointer;
+}
+
+/* theme */
+
+#themeToggle{
+position:fixed;
+left:20px;
+bottom:20px;
+width:58px;
+height:58px;
+border:none;
+border-radius:50%;
+background:#6366f1;
+color:white;
+font-size:24px;
+cursor:pointer;
+}
+
+/* light mode */
+
+body.light{
+background:#f3f4f6;
+color:#111;
+}
+
+body.light header,
+body.light .guide,
+body.light .card,
 body.light .aiBox{
+background:white;
+color:#111;
+}
 
-    background:white !important;
-    color:#111 !important;
+body.light input{
+background:white;
+color:#111;
+border:1px solid #ccc;
+}
 
+body.light .guide code,
+body.light code{
+background:#e5e7eb;
+color:#2563eb;
+}
+
+body.light .jp{
+color:#555;
 }
 
 body.light #chat{
-
-    background:#f3f4f6 !important;
-    color:#111 !important;
-
+background:#f3f4f6;
 }
 
 body.light .ai{
-
-    background:#e5e7eb !important;
-    color:#111 !important;
-
+background:#e5e7eb;
+color:#111;
 }
-
-body.light .user{
-
-    color:white !important;
-
-}
-
-/* text */
-
-body.light .section-title,
-body.light h1,
-body.light h2,
-body.light h3,
-body.light p,
-body.light span,
-body.light div{
-
-    color:#111 !important;
-
-}
-
-/* sub text */
-
-body.light .jp{
-
-    color:#555 !important;
-
-}
-
-/* blue text */
-
-body.light .edition,
-body.light .id{
-
-    color:#2563eb !important;
-
-}
-
-/* inputs */
-
-body.light input{
-
-    background:white !important;
-    color:#111 !important;
-    border:1px solid #ccc !important;
-
-}
-
-/* tabs */
 
 body.light .tab{
-
-    background:white !important;
-    color:#111 !important;
-    border:1px solid #ccc !important;
-
+background:white;
+color:#111;
+border:1px solid #ccc;
 }
 
 body.light .active{
-
-    background:#3b82f6 !important;
-    color:white !important;
-
+background:#3b82f6;
+color:white;
 }
 
-/* buttons */
-
-body.light button{
-
-    color:white;
-
-}
-
-/* scrollbar */
-
-body.light ::-webkit-scrollbar-track{
-
-    background:#e5e7eb;
-
-}
-
-body.light ::-webkit-scrollbar-thumb{
-
-    background:#3b82f6;
-
-}
-
-</style>
 </style>
 </head>
 
