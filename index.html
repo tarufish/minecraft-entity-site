@@ -8,727 +8,618 @@
 マイクラ エンティティID一覧【Java版・統合版】
 </title>
 
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/minecraft-4">
+
 <style>
 
 html{
-    scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 body{
-    margin:0;
-    background:#0f1115;
-    color:white;
- font-family:'Minecraft', sans-serif;
-    transition:
-    background 0.3s,
-    color 0.3s;
+margin:0;
+background:#0f1115;
+color:white;
+font-family:'Minecraft', sans-serif;
+overflow-x:hidden;
 }
 
-header{
-    background:#181c24;
-    padding:25px;
-    text-align:center;
-    font-size:30px;
-    font-weight:bold;
-    box-shadow:0 2px 10px rgba(0,0,0,0.4);
-    position:sticky;
-    top:0;
-    z-index:999;
-    backdrop-filter:blur(10px);
-}
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
-}
-
-.guide{
-    background:#1b2230;
-    padding:20px;
-    border-radius:16px;
-    margin-bottom:20px;
-    line-height:1.8;
-    animation:fadeUp 0.4s ease;
-}
-
-.guide code{
-    background:#0f1115;
-    padding:5px 10px;
-    border-radius:8px;
-    color:#8ab4ff;
-}
-
-body.light .guide code{
-    background:#e5e7eb;
-    color:#2563eb;
-}
-/* ===== 背景アニメーション ===== */
+/* 背景 */
 
 body::before{
 
-    content:"";
+content:"";
 
-    position:fixed;
+position:fixed;
 
-    inset:0;
+inset:0;
 
-    background:
-    radial-gradient(circle at top left,
-    rgba(59,130,246,0.15),
-    transparent 30%),
+background:
+radial-gradient(circle at top left,
+rgba(59,130,246,0.15),
+transparent 30%),
 
-    radial-gradient(circle at bottom right,
-    rgba(99,102,241,0.15),
-    transparent 30%);
+radial-gradient(circle at bottom right,
+rgba(99,102,241,0.15),
+transparent 30%);
 
-    animation:bgMove 10s infinite alternate ease-in-out;
+animation:bgMove 10s infinite alternate ease-in-out;
 
-    z-index:-1;
+z-index:-1;
 
 }
 
 @keyframes bgMove{
 
-    from{
-        transform:scale(1) translateY(0px);
-    }
+from{
+transform:scale(1);
+}
 
-    to{
-        transform:scale(1.1) translateY(-20px);
-    }
+to{
+transform:scale(1.1) translateY(-20px);
+}
 
 }
 
-/* ===== カード光る ===== */
+/* header */
+
+header{
+
+background:#181c24;
+
+padding:25px;
+
+text-align:center;
+
+font-size:30px;
+
+position:sticky;
+
+top:0;
+
+z-index:999;
+
+backdrop-filter:blur(10px);
+
+animation:glow 3s infinite alternate;
+
+}
+
+@keyframes glow{
+
+from{
+box-shadow:0 0 10px rgba(59,130,246,0.25);
+}
+
+to{
+box-shadow:0 0 25px rgba(59,130,246,0.7);
+}
+
+}
+
+.container{
+
+max-width:1200px;
+
+margin:auto;
+
+padding:20px;
+
+}
+
+/* guide */
+
+.guide{
+
+background:#1b2230;
+
+padding:20px;
+
+border-radius:18px;
+
+margin-bottom:20px;
+
+}
+
+.guide code{
+
+background:#0f1115;
+
+padding:5px 10px;
+
+border-radius:8px;
+
+color:#8ab4ff;
+
+}
+
+/* search */
+
+input{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:14px;
+
+background:#1f2633;
+
+color:white;
+
+font-size:18px;
+
+box-sizing:border-box;
+
+margin-bottom:20px;
+
+font-family:'Minecraft', sans-serif;
+
+}
+
+.tabs{
+
+display:flex;
+
+gap:10px;
+
+margin-bottom:25px;
+
+flex-wrap:wrap;
+
+}
+
+.tab{
+
+padding:12px 20px;
+
+border:none;
+
+border-radius:12px;
+
+background:#222a38;
+
+color:white;
+
+cursor:pointer;
+
+font-family:'Minecraft', sans-serif;
+
+transition:0.2s;
+
+}
+
+.tab:hover{
+
+transform:translateY(-3px);
+
+}
+
+.active{
+
+background:#3b82f6;
+
+box-shadow:
+0 0 15px rgba(59,130,246,0.5);
+
+}
+
+.section-title{
+
+font-size:30px;
+
+margin-top:40px;
+
+margin-bottom:20px;
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:18px;
+
+}
+
+/* card */
 
 .card{
 
-    position:relative;
+background:#1a1f29;
 
-    overflow:hidden;
+padding:18px;
+
+border-radius:18px;
+
+position:relative;
+
+overflow:hidden;
+
+transition:0.25s;
+
+animation:fadeUp 0.4s ease;
 
 }
 
 .card::before{
 
-    content:"";
+content:"";
 
-    position:absolute;
+position:absolute;
 
-    top:-120%;
+top:-120%;
 
-    left:-120%;
+left:-120%;
 
-    width:250%;
+width:250%;
 
-    height:250%;
+height:250%;
 
-    background:
-    linear-gradient(
-    45deg,
-    transparent,
-    rgba(255,255,255,0.06),
-    transparent);
+background:
+linear-gradient(
+45deg,
+transparent,
+rgba(255,255,255,0.05),
+transparent);
 
-    transform:rotate(25deg);
+transform:rotate(25deg);
 
-    transition:0.8s;
+transition:0.8s;
 
 }
 
 .card:hover::before{
 
-    top:100%;
-    left:100%;
+top:100%;
+left:100%;
 
-}
-
-/* ===== タイトルアニメ ===== */
-
-header{
-
-    animation:headerGlow 3s infinite alternate;
-
-}
-
-@keyframes headerGlow{
-
-    from{
-        box-shadow:
-        0 0 10px rgba(59,130,246,0.25);
-    }
-
-    to{
-        box-shadow:
-        0 0 25px rgba(59,130,246,0.55);
-    }
-
-}
-
-/* ===== 入力欄ネオン ===== */
-
-input:focus{
-
-    box-shadow:
-    0 0 15px rgba(59,130,246,0.5);
-
-}
-
-/* ===== ボタンぷにぷに ===== */
-
-.copyBtn:active,
-.tab:active,
-#topBtn:active,
-#themeToggle:active{
-
-    transform:scale(0.92);
-
-}
-
-/* ===== スクロール出現 ===== */
-
-.card{
-
-    animation:
-    fadeUp 0.4s ease,
-    floatCard 4s ease-in-out infinite;
-
-}
-
-@keyframes floatCard{
-
-    0%{
-        transform:translateY(0px);
-    }
-
-    50%{
-        transform:translateY(-2px);
-    }
-
-    100%{
-        transform:translateY(0px);
-    }
-
-}
-
-/* ===== タブ光る ===== */
-
-.active{
-
-    box-shadow:
-    0 0 15px rgba(59,130,246,0.5);
-
-}
-
-/* ===== IDネオン ===== */
-
-.id{
-
-    text-shadow:
-    0 0 8px rgba(59,130,246,0.6);
-
-}
-
-/* ===== スクロールバー ===== */
-
-::-webkit-scrollbar{
-    width:10px;
-}
-
-::-webkit-scrollbar-track{
-    background:#111827;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#3b82f6;
-    border-radius:999px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-    background:#60a5fa;
-}
-
-input{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:14px;
-    background:#1f2633;
-    color:white;
-    font-size:18px;
-    margin-bottom:20px;
-    box-sizing:border-box;
-    transition:0.2s;
-}
-
-input:focus{
-    outline:none;
-    transform:scale(1.01);
-}
-
-.tabs{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:30px;
-}
-
-.tab{
-    padding:12px 20px;
-    border:none;
-    border-radius:12px;
-    background:#222a38;
-    color:white;
-    cursor:pointer;
-    font-size:16px;
-    transition:0.2s;
-}
-
-.tab:hover{
-    transform:translateY(-3px);
-}
-
-.active{
-    background:#3b82f6;
-}
-
-.section-title{
-    font-size:32px;
-    margin-top:40px;
-    margin-bottom:20px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:18px;
-}
-
-.card{
-    background:#1a1f29;
-    border-radius:16px;
-    padding:18px;
-    transition:0.25s;
-    border:1px solid transparent;
-    animation:fadeUp 0.35s ease;
 }
 
 .card:hover{
-    transform:
-    translateY(-6px)
-    scale(1.02);
 
-    border-color:#3b82f6;
+transform:
+translateY(-6px)
+scale(1.02);
 
-    box-shadow:
-    0 10px 25px rgba(0,0,0,0.35);
-}
-
-.mob{
-    font-size:24px;
-    margin-bottom:10px;
-}
-
-.jp{
-    color:#aaa;
-    margin-bottom:10px;
-}
-
-.edition{
-    color:#6ea8ff;
-    margin-bottom:10px;
-}
-
-.id{
-    font-family:monospace;
-    font-size:18px;
-    color:#8ab4ff;
-    margin-bottom:15px;
-}
-
-.copyBtn{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#3b82f6;
-    color:white;
-    cursor:pointer;
-    font-size:15px;
-    transition:0.2s;
-}
-
-.copyBtn:hover{
-    transform:scale(1.03);
-}
-
-#topBtn{
-
-    position:fixed;
-
-    right:20px;
-    bottom:20px;
-
-    width:58px;
-    height:58px;
-
-    border:none;
-    border-radius:50%;
-
-    background:
-    linear-gradient(
-    135deg,
-    #3b82f6,
-    #2563eb);
-
-    color:white;
-
-    font-size:24px;
-
-    cursor:pointer;
-
-    box-shadow:
-    0 5px 20px rgba(59,130,246,0.5);
-
-    opacity:0;
-    pointer-events:none;
-
-    transition:
-    transform 0.25s,
-    opacity 0.25s,
-    box-shadow 0.25s;
-
-}
-
-#topBtn.show{
-    opacity:1;
-    pointer-events:auto;
-}
-
-#topBtn:hover{
-
-    transform:
-    translateY(-5px)
-    scale(1.08);
-
-    box-shadow:
-    0 10px 25px rgba(59,130,246,0.7);
-
-}
-
-#themeToggle{
-
-    position:fixed;
-
-    left:20px;
-    bottom:20px;
-
-    width:58px;
-    height:58px;
-
-    border:none;
-    border-radius:50%;
-
-    background:
-    linear-gradient(
-    135deg,
-    #6366f1,
-    #3b82f6);
-
-    color:white;
-
-    font-size:24px;
-
-    cursor:pointer;
-
-    box-shadow:
-    0 5px 20px rgba(59,130,246,0.45);
-
-    transition:
-    transform 0.25s,
-    box-shadow 0.25s;
-
-}
-
-#themeToggle:hover{
-
-    transform:
-    translateY(-5px)
-    rotate(10deg)
-    scale(1.08);
-
-    box-shadow:
-    0 10px 25px rgba(59,130,246,0.7);
+box-shadow:
+0 10px 25px rgba(0,0,0,0.35);
 
 }
 
 @keyframes fadeUp{
 
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
+from{
+opacity:0;
+transform:translateY(20px);
+}
 
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+to{
+opacity:1;
+transform:translateY(0);
+}
 
 }
 
-/* ===== ホワイトモード ===== */
+.mob{
 
-body.light{
-    background:#f3f5fa;
-    color:#111;
-}
+font-size:24px;
 
-body.light header{
-    background:white;
-    color:#111;
-}
-
-body.light .guide{
-    background:white;
-}
-
-body.light input{
-    background:white;
-    color:#111;
-    border:1px solid #ddd;
-}
-
-body.light .tab{
-    background:white;
-    color:#111;
-    border:1px solid #ddd;
-}
-
-body.light .active{
-    background:#3b82f6;
-    color:white;
-}
-
-body.light .card{
-    background:white;
-    color:#111;
-}
-
-body.light .jp{
-    color:#555;
-}
-
-body.light .id{
-    color:#2563eb;
-}
-
-.aiBox{
-
-    margin-top:40px;
-
-    background:#1b2230;
-
-    padding:20px;
-
-    border-radius:20px;
+margin-bottom:10px;
 
 }
 
-#chat{
+.jp{
 
-    height:300px;
+color:#aaa;
 
-    overflow:auto;
-
-    background:#0f1115;
-
-    border-radius:14px;
-
-    padding:15px;
-
-    margin-bottom:15px;
+margin-bottom:10px;
 
 }
 
-.message{
+.edition{
 
-    margin-bottom:15px;
+color:#6ea8ff;
 
-    padding:12px;
-
-    border-radius:12px;
+margin-bottom:10px;
 
 }
 
-.user{
+.id{
 
-    background:#2563eb;
+color:#8ab4ff;
+
+margin-bottom:15px;
+
+text-shadow:
+0 0 8px rgba(59,130,246,0.6);
+
+}
+
+.copyBtn{
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+border-radius:10px;
+
+background:#3b82f6;
+
+color:white;
+
+cursor:pointer;
+
+font-family:'Minecraft', sans-serif;
+
+transition:0.2s;
 
 }
 
-.ai{
+.copyBtn:hover{
 
-    background:#222a38;
-
-}
-
-.aiBox button{
-
-    width:100%;
-
-    margin-top:10px;
-
-    padding:14px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#3b82f6;
-
-    color:white;
+transform:scale(1.03);
 
 }
-/* ===== AIボタン ===== */
+
+/* AI */
 
 #openAiBtn{
 
-    position:fixed;
+position:fixed;
 
-    left:20px;
-    bottom:90px;
+left:20px;
 
-    width:58px;
-    height:58px;
+bottom:90px;
 
-    border:none;
-    border-radius:50%;
+width:58px;
 
-    background:
-    linear-gradient(
-    135deg,
-    #8b5cf6,
-    #3b82f6);
+height:58px;
 
-    color:white;
+border:none;
 
-    font-size:26px;
+border-radius:50%;
 
-    cursor:pointer;
+background:
+linear-gradient(
+135deg,
+#8b5cf6,
+#3b82f6);
 
-    z-index:9999;
+color:white;
 
-    box-shadow:
-    0 5px 20px rgba(59,130,246,0.5);
+font-size:24px;
 
-    transition:0.25s;
+cursor:pointer;
+
+z-index:9999;
 
 }
-
-#openAiBtn:hover{
-
-    transform:
-    scale(1.1)
-    rotate(10deg);
-
-}
-
-/* ===== AI画面 ===== */
 
 .aiBox{
 
-    position:fixed;
+position:fixed;
 
-    right:-450px;
+right:-420px;
 
-    top:0;
+top:0;
 
-    width:400px;
+width:400px;
 
-    height:100vh;
+height:100vh;
 
-    margin-top:0;
+background:
+rgba(15,17,21,0.95);
 
-    border-radius:0;
+backdrop-filter:blur(10px);
 
-    z-index:9998;
+padding:20px;
 
-    transition:0.35s;
+transition:0.35s;
 
-    overflow:auto;
+z-index:9998;
 
-    backdrop-filter:blur(12px);
-
-    background:
-    rgba(15,17,21,0.92);
-
-    border-left:
-    1px solid rgba(255,255,255,0.08);
+overflow:auto;
 
 }
 
 .aiBox.open{
 
-    right:0;
+right:0;
 
 }
-
-/* ===== AIチャット ===== */
 
 #chat{
 
-    height:65vh;
+height:60vh;
+
+overflow:auto;
+
+background:#111827;
+
+padding:15px;
+
+border-radius:12px;
+
+margin-bottom:15px;
 
 }
 
-/* ===== AIメッセージ ===== */
+.message{
+
+padding:12px;
+
+border-radius:12px;
+
+margin-bottom:12px;
+
+line-height:1.6;
+
+}
+
+.user{
+
+background:#2563eb;
+
+}
 
 .ai{
 
-    line-height:1.7;
+background:#222a38;
 
 }
 
-/* ===== AI入力 ===== */
+.aiBox button{
 
-#aiInput{
+width:100%;
 
-    margin-top:10px;
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#3b82f6;
+
+color:white;
+
+font-family:'Minecraft', sans-serif;
+
+margin-top:10px;
 
 }
 
-/* ===== モバイル対応 ===== */
+/* top button */
+
+#topBtn{
+
+position:fixed;
+
+right:20px;
+
+bottom:20px;
+
+width:58px;
+
+height:58px;
+
+border:none;
+
+border-radius:50%;
+
+background:
+linear-gradient(
+135deg,
+#3b82f6,
+#2563eb);
+
+color:white;
+
+font-size:24px;
+
+cursor:pointer;
+
+opacity:0;
+
+pointer-events:none;
+
+transition:0.25s;
+
+}
+
+#topBtn.show{
+
+opacity:1;
+
+pointer-events:auto;
+
+}
+
+#themeToggle{
+
+position:fixed;
+
+left:20px;
+
+bottom:20px;
+
+width:58px;
+
+height:58px;
+
+border:none;
+
+border-radius:50%;
+
+background:
+linear-gradient(
+135deg,
+#6366f1,
+#3b82f6);
+
+color:white;
+
+font-size:24px;
+
+cursor:pointer;
+
+}
+
+/* light mode */
+
+body.light{
+
+background:#f3f5fa;
+
+color:#111;
+
+}
+
+body.light .card,
+body.light .guide,
+body.light .aiBox{
+
+background:white;
+
+color:#111;
+
+}
+
+body.light input{
+
+background:white;
+
+color:#111;
+
+border:1px solid #ddd;
+
+}
+
+body.light #chat{
+
+background:#f3f4f6;
+
+}
 
 @media(max-width:600px){
 
-    .aiBox{
-
-        width:100%;
-
-    }
+.aiBox{
+width:100%;
+right:-100%;
+}
 
 }
+
 </style>
 </head>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/minecraft-4">
-<div class="aiBox" id="aiBox">
 
-    <h2>MINEAI</h2>
-
-    <div id="chat"></div>
-
-    <input
-    type="text"
-    id="aiInput"
-    placeholder="質問してね！"
-    >
-
-    <button onclick="sendMessage()">
-    送信
-    </button>
-
-</div>
 <body>
 
 <header>
@@ -742,22 +633,19 @@ body.light .id{
 <h2>📖 召喚方法</h2>
 
 <p>
-チャット欄で
-<code>/summon ID</code>
-を入力するとモブを召喚できます。
+<code>/summon zombie</code>
 </p>
 
-<p>例：</p>
-
-<code>/summon zombie</code><br><br>
+<p>
 <code>/summon warden</code>
+</p>
 
 </div>
 
 <input
 type="text"
 id="search"
-placeholder="モブ検索（例：ゾンビ、warden、creeper）"
+placeholder="モブ検索..."
 >
 
 <div class="tabs">
@@ -773,7 +661,7 @@ onclick="changeEdition('all', this)"
 class="tab"
 onclick="changeEdition('Java', this)"
 >
-Java版
+Java
 </button>
 
 <button
@@ -785,143 +673,95 @@ onclick="changeEdition('統合版', this)"
 
 </div>
 
-<h2 class="section-title">😈 敵対モブ</h2>
+<h2 class="section-title">
+😈 敵対モブ
+</h2>
+
 <div class="grid" id="hostile"></div>
 
-<h2 class="section-title">🐮 友好モブ</h2>
+<h2 class="section-title">
+🐮 友好モブ
+</h2>
+
 <div class="grid" id="friendly"></div>
 
 </div>
 
-<button id="topBtn" onclick="scrollToTop()">
-⬆
+<!-- AI -->
+
+<div class="aiBox" id="aiBox">
+
+<h2>🤖 チャッピーAI</h2>
+
+<div id="chat"></div>
+
+<input
+type="text"
+id="aiInput"
+placeholder="質問してね！"
+>
+
+<button onclick="sendMessage()">
+送信
+</button>
+
+</div>
+
+<button id="openAiBtn" onclick="toggleAi()">
+🤖
 </button>
 
 <button id="themeToggle" onclick="toggleTheme()">
 🌙
 </button>
 
+<button id="topBtn" onclick="scrollToTop()">
+⬆
+</button>
+
 <script>
 
 const data = [
 
-/* ===== Java 敵対 ===== */
+{
+type:"hostile",
+edition:"Java",
+name:"Zombie",
+jp:"ゾンビ",
+id:"zombie"
+},
 
-{type:"hostile",edition:"Java",name:"Zombie",jp:"ゾンビ",id:"zombie"},
-{type:"hostile",edition:"Java",name:"Creeper",jp:"クリーパー",id:"creeper"},
-{type:"hostile",edition:"Java",name:"Skeleton",jp:"スケルトン",id:"skeleton"},
-{type:"hostile",edition:"Java",name:"Spider",jp:"クモ",id:"spider"},
-{type:"hostile",edition:"Java",name:"Cave Spider",jp:"洞窟グモ",id:"cave_spider"},
-{type:"hostile",edition:"Java",name:"Enderman",jp:"エンダーマン",id:"enderman"},
-{type:"hostile",edition:"Java",name:"Witch",jp:"ウィッチ",id:"witch"},
-{type:"hostile",edition:"Java",name:"Slime",jp:"スライム",id:"slime"},
-{type:"hostile",edition:"Java",name:"Blaze",jp:"ブレイズ",id:"blaze"},
-{type:"hostile",edition:"Java",name:"Ghast",jp:"ガスト",id:"ghast"},
-{type:"hostile",edition:"Java",name:"Magma Cube",jp:"マグマキューブ",id:"magma_cube"},
-{type:"hostile",edition:"Java",name:"Phantom",jp:"ファントム",id:"phantom"},
-{type:"hostile",edition:"Java",name:"Drowned",jp:"ドラウンド",id:"drowned"},
-{type:"hostile",edition:"Java",name:"Husk",jp:"ハスク",id:"husk"},
-{type:"hostile",edition:"Java",name:"Stray",jp:"ストレイ",id:"stray"},
-{type:"hostile",edition:"Java",name:"Guardian",jp:"ガーディアン",id:"guardian"},
-{type:"hostile",edition:"Java",name:"Elder Guardian",jp:"エルダーガーディアン",id:"elder_guardian"},
-{type:"hostile",edition:"Java",name:"Shulker",jp:"シュルカー",id:"shulker"},
-{type:"hostile",edition:"Java",name:"Silverfish",jp:"シルバーフィッシュ",id:"silverfish"},
-{type:"hostile",edition:"Java",name:"Vex",jp:"ヴェックス",id:"vex"},
-{type:"hostile",edition:"Java",name:"Evoker",jp:"エヴォーカー",id:"evoker"},
-{type:"hostile",edition:"Java",name:"Vindicator",jp:"ヴィンディケーター",id:"vindicator"},
-{type:"hostile",edition:"Java",name:"Pillager",jp:"ピリジャー",id:"pillager"},
-{type:"hostile",edition:"Java",name:"Ravager",jp:"ラヴェジャー",id:"ravager"},
-{type:"hostile",edition:"Java",name:"Warden",jp:"ウォーデン",id:"warden"},
-{type:"hostile",edition:"Java",name:"Wither",jp:"ウィザー",id:"wither"},
-{type:"hostile",edition:"Java",name:"Ender Dragon",jp:"エンダードラゴン",id:"ender_dragon"},
+{
+type:"hostile",
+edition:"Java",
+name:"Creeper",
+jp:"クリーパー",
+id:"creeper"
+},
 
-/* ===== Java 友好 ===== */
+{
+type:"hostile",
+edition:"統合版",
+name:"Warden",
+jp:"ウォーデン",
+id:"warden"
+},
 
-{type:"friendly",edition:"Java",name:"Cow",jp:"ウシ",id:"cow"},
-{type:"friendly",edition:"Java",name:"Pig",jp:"ブタ",id:"pig"},
-{type:"friendly",edition:"Java",name:"Sheep",jp:"ヒツジ",id:"sheep"},
-{type:"friendly",edition:"Java",name:"Chicken",jp:"ニワトリ",id:"chicken"},
-{type:"friendly",edition:"Java",name:"Horse",jp:"ウマ",id:"horse"},
-{type:"friendly",edition:"Java",name:"Donkey",jp:"ロバ",id:"donkey"},
-{type:"friendly",edition:"Java",name:"Mule",jp:"ラバ",id:"mule"},
-{type:"friendly",edition:"Java",name:"Wolf",jp:"オオカミ",id:"wolf"},
-{type:"friendly",edition:"Java",name:"Cat",jp:"ネコ",id:"cat"},
-{type:"friendly",edition:"Java",name:"Ocelot",jp:"ヤマネコ",id:"ocelot"},
-{type:"friendly",edition:"Java",name:"Villager",jp:"村人",id:"villager"},
-{type:"friendly",edition:"Java",name:"Iron Golem",jp:"アイアンゴーレム",id:"iron_golem"},
-{type:"friendly",edition:"Java",name:"Snow Golem",jp:"スノーゴーレム",id:"snow_golem"},
-{type:"friendly",edition:"Java",name:"Axolotl",jp:"ウーパールーパー",id:"axolotl"},
-{type:"friendly",edition:"Java",name:"Allay",jp:"アレイ",id:"allay"},
-{type:"friendly",edition:"Java",name:"Bee",jp:"ハチ",id:"bee"},
-{type:"friendly",edition:"Java",name:"Fox",jp:"キツネ",id:"fox"},
-{type:"friendly",edition:"Java",name:"Frog",jp:"カエル",id:"frog"},
-{type:"friendly",edition:"Java",name:"Camel",jp:"ラクダ",id:"camel"},
-{type:"friendly",edition:"Java",name:"Sniffer",jp:"スニッファー",id:"sniffer"},
-{type:"friendly",edition:"Java",name:"Panda",jp:"パンダ",id:"panda"},
-{type:"friendly",edition:"Java",name:"Polar Bear",jp:"シロクマ",id:"polar_bear"},
-{type:"friendly",edition:"Java",name:"Rabbit",jp:"ウサギ",id:"rabbit"},
-{type:"friendly",edition:"Java",name:"Turtle",jp:"カメ",id:"turtle"},
-{type:"friendly",edition:"Java",name:"Parrot",jp:"オウム",id:"parrot"},
-{type:"friendly",edition:"Java",name:"Goat",jp:"ヤギ",id:"goat"},
+{
+type:"friendly",
+edition:"Java",
+name:"Cow",
+jp:"ウシ",
+id:"cow"
+},
 
-/* ===== 統合版 敵対 ===== */
-
-{type:"hostile",edition:"統合版",name:"Zombie",jp:"ゾンビ",id:"zombie"},
-{type:"hostile",edition:"統合版",name:"Creeper",jp:"クリーパー",id:"creeper"},
-{type:"hostile",edition:"統合版",name:"Skeleton",jp:"スケルトン",id:"skeleton"},
-{type:"hostile",edition:"統合版",name:"Spider",jp:"クモ",id:"spider"},
-{type:"hostile",edition:"統合版",name:"Cave Spider",jp:"洞窟グモ",id:"cave_spider"},
-{type:"hostile",edition:"統合版",name:"Enderman",jp:"エンダーマン",id:"enderman"},
-{type:"hostile",edition:"統合版",name:"Witch",jp:"ウィッチ",id:"witch"},
-{type:"hostile",edition:"統合版",name:"Slime",jp:"スライム",id:"slime"},
-{type:"hostile",edition:"統合版",name:"Blaze",jp:"ブレイズ",id:"blaze"},
-{type:"hostile",edition:"統合版",name:"Ghast",jp:"ガスト",id:"ghast"},
-{type:"hostile",edition:"統合版",name:"Magma Cube",jp:"マグマキューブ",id:"magma_cube"},
-{type:"hostile",edition:"統合版",name:"Phantom",jp:"ファントム",id:"phantom"},
-{type:"hostile",edition:"統合版",name:"Drowned",jp:"ドラウンド",id:"drowned"},
-{type:"hostile",edition:"統合版",name:"Husk",jp:"ハスク",id:"husk"},
-{type:"hostile",edition:"統合版",name:"Stray",jp:"ストレイ",id:"stray"},
-{type:"hostile",edition:"統合版",name:"Guardian",jp:"ガーディアン",id:"guardian"},
-{type:"hostile",edition:"統合版",name:"Elder Guardian",jp:"エルダーガーディアン",id:"elder_guardian"},
-{type:"hostile",edition:"統合版",name:"Shulker",jp:"シュルカー",id:"shulker"},
-{type:"hostile",edition:"統合版",name:"Silverfish",jp:"シルバーフィッシュ",id:"silverfish"},
-{type:"hostile",edition:"統合版",name:"Vex",jp:"ヴェックス",id:"vex"},
-{type:"hostile",edition:"統合版",name:"Evoker",jp:"エヴォーカー",id:"evoker"},
-{type:"hostile",edition:"統合版",name:"Vindicator",jp:"ヴィンディケーター",id:"vindicator"},
-{type:"hostile",edition:"統合版",name:"Pillager",jp:"ピリジャー",id:"pillager"},
-{type:"hostile",edition:"統合版",name:"Ravager",jp:"ラヴェジャー",id:"ravager"},
-{type:"hostile",edition:"統合版",name:"Warden",jp:"ウォーデン",id:"warden"},
-{type:"hostile",edition:"統合版",name:"Wither",jp:"ウィザー",id:"wither"},
-{type:"hostile",edition:"統合版",name:"Ender Dragon",jp:"エンダードラゴン",id:"ender_dragon"},
-
-/* ===== 統合版 友好 ===== */
-
-{type:"friendly",edition:"統合版",name:"Cow",jp:"ウシ",id:"cow"},
-{type:"friendly",edition:"統合版",name:"Pig",jp:"ブタ",id:"pig"},
-{type:"friendly",edition:"統合版",name:"Sheep",jp:"ヒツジ",id:"sheep"},
-{type:"friendly",edition:"統合版",name:"Chicken",jp:"ニワトリ",id:"chicken"},
-{type:"friendly",edition:"統合版",name:"Horse",jp:"ウマ",id:"horse"},
-{type:"friendly",edition:"統合版",name:"Donkey",jp:"ロバ",id:"donkey"},
-{type:"friendly",edition:"統合版",name:"Mule",jp:"ラバ",id:"mule"},
-{type:"friendly",edition:"統合版",name:"Wolf",jp:"オオカミ",id:"wolf"},
-{type:"friendly",edition:"統合版",name:"Cat",jp:"ネコ",id:"cat"},
-{type:"friendly",edition:"統合版",name:"Ocelot",jp:"ヤマネコ",id:"ocelot"},
-{type:"friendly",edition:"統合版",name:"Villager",jp:"村人",id:"villager"},
-{type:"friendly",edition:"統合版",name:"Iron Golem",jp:"アイアンゴーレム",id:"iron_golem"},
-{type:"friendly",edition:"統合版",name:"Snow Golem",jp:"スノーゴーレム",id:"snow_golem"},
-{type:"friendly",edition:"統合版",name:"Axolotl",jp:"ウーパールーパー",id:"axolotl"},
-{type:"friendly",edition:"統合版",name:"Allay",jp:"アレイ",id:"allay"},
-{type:"friendly",edition:"統合版",name:"Bee",jp:"ハチ",id:"bee"},
-{type:"friendly",edition:"統合版",name:"Fox",jp:"キツネ",id:"fox"},
-{type:"friendly",edition:"統合版",name:"Frog",jp:"カエル",id:"frog"},
-{type:"friendly",edition:"統合版",name:"Camel",jp:"ラクダ",id:"camel"},
-{type:"friendly",edition:"統合版",name:"Sniffer",jp:"スニッファー",id:"sniffer"},
-{type:"friendly",edition:"統合版",name:"Panda",jp:"パンダ",id:"panda"},
-{type:"friendly",edition:"統合版",name:"Polar Bear",jp:"シロクマ",id:"polar_bear"},
-{type:"friendly",edition:"統合版",name:"Rabbit",jp:"ウサギ",id:"rabbit"},
-{type:"friendly",edition:"統合版",name:"Turtle",jp:"カメ",id:"turtle"},
-{type:"friendly",edition:"統合版",name:"Parrot",jp:"オウム",id:"parrot"},
-{type:"friendly",edition:"統合版",name:"Goat",jp:"ヤギ",id:"goat"}
+{
+type:"friendly",
+edition:"統合版",
+name:"Allay",
+jp:"アレイ",
+id:"allay"
+}
 
 ];
 
@@ -932,19 +772,29 @@ function createCard(e){
 return `
 <div class="card">
 
-<div class="mob">${e.name}</div>
+<div class="mob">
+${e.name}
+</div>
 
-<div class="jp">${e.jp}</div>
+<div class="jp">
+${e.jp}
+</div>
 
-<div class="edition">${e.edition}</div>
+<div class="edition">
+${e.edition}
+</div>
 
-<div class="id">${e.id}</div>
+<div class="id">
+${e.id}
+</div>
 
 <button
 class="copyBtn"
 onclick="copyCommand('${e.id}', this)"
 >
+
 📋 IDコピー
+
 </button>
 
 </div>
@@ -964,8 +814,7 @@ hostile.innerHTML = "";
 friendly.innerHTML = "";
 
 const search =
-document
-.getElementById("search")
+document.getElementById("search")
 .value
 .toLowerCase();
 
@@ -995,19 +844,12 @@ friendly.innerHTML += createCard(e);
 
 }
 
-function copyCommand(id, btn){
+render();
 
-navigator.clipboard.writeText(id);
-
-btn.innerHTML = "✅";
-
-setTimeout(()=>{
-btn.innerHTML = "📋 IDコピー";
-},1200);
-
-}
-
-function changeEdition(edition, btn){
+function changeEdition(
+edition,
+btn
+){
 
 currentEdition = edition;
 
@@ -1027,7 +869,47 @@ document
 .getElementById("search")
 .addEventListener("input", render);
 
-render();
+function copyCommand(id, btn){
+
+navigator.clipboard.writeText(id);
+
+btn.innerHTML = "✅";
+
+setTimeout(()=>{
+
+btn.innerHTML =
+"📋 IDコピー";
+
+},1200);
+
+}
+
+function toggleTheme(){
+
+document.body.classList.toggle("light");
+
+const btn =
+document.getElementById("themeToggle");
+
+if(
+document.body.classList.contains("light")
+){
+btn.innerHTML = "☀️";
+}
+else{
+btn.innerHTML = "🌙";
+}
+
+}
+
+function scrollToTop(){
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
 
 const topBtn =
 document.getElementById("topBtn");
@@ -1043,155 +925,87 @@ topBtn.classList.remove("show");
 
 });
 
-function scrollToTop(){
+function toggleAi(){
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-function toggleTheme(){
-
-document.body.classList.toggle("light");
-
-const btn =
-document.getElementById("themeToggle");
-
-if(document.body.classList.contains("light")){
-btn.innerHTML = "☀️";
-}
-else{
-btn.innerHTML = "🌙";
-}
+document
+.getElementById("aiBox")
+.classList
+.toggle("open");
 
 }
+
 function sendMessage(){
 
-    const input =
-    document.getElementById("aiInput");
+const input =
+document.getElementById("aiInput");
 
-    const chat =
-    document.getElementById("chat");
+const chat =
+document.getElementById("chat");
 
-    const text = input.value;
+const text = input.value;
 
-    if(text.trim() === "") return;
+if(text.trim() === "") return;
 
-    chat.innerHTML += `
-    <div class="message user">
-    😎 ${text}
-    </div>
-    `;
+chat.innerHTML += `
+<div class="message user">
+😎 ${text}
+</div>
+`;
 
-    let reply =
-   let reply =
+let reply =
 "ごめんね🥲 まだ分からないかも！";
 
-if(
-text.includes("ウォーデン")
-){
+if(text.includes("ウォーデン")){
 
-    reply =
-    "わかったよ！😎<br><br>" +
-
-    "ウォーデンを召喚するなら👇<br><br>" +
-
-    "<code>/summon warden</code>";
+reply =
+"わかったよ😎<br><br>" +
+"<code>/summon warden</code>" +
+"<br><br>で召喚できるよ！";
 
 }
 
-if(
-text.includes("100")
-){
+if(text.includes("100")){
 
-    reply +=
-    "<br><br>100体召喚したいなら、" +
-    "コマンドブロックを使うのがおすすめ🔥";
+reply +=
+"<br><br>100体ならコマンドブロックがおすすめ🔥";
 
 }
 
-if(
-text.includes("クリーパー")
-){
+if(text.includes("クリーパー")){
 
-    reply =
-    "クリーパーなら👇<br><br>" +
-
-    "<code>/summon creeper</code>";
+reply =
+"<code>/summon creeper</code>";
 
 }
 
-if(
-text.includes("最強の剣")
-){
+setTimeout(()=>{
 
-    reply =
-    "最強剣ならこれ😎🔥<br><br>" +
+chat.innerHTML += `
+<div class="message ai">
+🤖 ${reply}
+</div>
+`;
 
-    "<code>/give @p diamond_sword</code>";
+chat.scrollTop =
+chat.scrollHeight;
 
-}
+},700);
 
-    setTimeout(()=>{
-
-        chat.innerHTML += `
-        <div class="message ai">
-        🤖 ${reply}
-        </div>
-        `;
-
-        chat.scrollTop =
-        chat.scrollHeight;
-
-    },700);
-
-    input.value = "";
+input.value = "";
 
 }
+
 document
 .getElementById("aiInput")
 .addEventListener("keypress", function(e){
 
-    if(e.key === "Enter"){
-        sendMessage();
-    }
-
-});
-function toggleAi(){
-
-    const aiBox =
-    document.getElementById("aiBox");
-
-    aiBox.classList.toggle("open");
-
+if(e.key === "Enter"){
+sendMessage();
 }
-
-/* ===== Enter送信 ===== */
-
-document.addEventListener("DOMContentLoaded", ()=>{
-
-    const aiInput =
-    document.getElementById("aiInput");
-
-    if(aiInput){
-
-        aiInput.addEventListener("keypress", function(e){
-
-            if(e.key === "Enter"){
-                sendMessage();
-            }
-
-        });
-
-    }
 
 });
 
 </script>
-<button id="openAiBtn" onclick="toggleAi()">
-🤖
-</button>
+
 </body>
 </html>
