@@ -1161,12 +1161,33 @@ document
 });
 function toggleAi(){
 
-    document
-    .getElementById("aiBox")
-    .classList
-    .toggle("open");
+    const aiBox =
+    document.getElementById("aiBox");
+
+    aiBox.classList.toggle("open");
 
 }
+
+/* ===== Enter送信 ===== */
+
+document.addEventListener("DOMContentLoaded", ()=>{
+
+    const aiInput =
+    document.getElementById("aiInput");
+
+    if(aiInput){
+
+        aiInput.addEventListener("keypress", function(e){
+
+            if(e.key === "Enter"){
+                sendMessage();
+            }
+
+        });
+
+    }
+
+});
 
 </script>
 <button id="openAiBtn" onclick="toggleAi()">
