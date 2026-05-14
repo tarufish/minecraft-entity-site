@@ -523,9 +523,93 @@ body.light .id{
     color:#2563eb;
 }
 
+.aiBox{
+
+    margin-top:40px;
+
+    background:#1b2230;
+
+    padding:20px;
+
+    border-radius:20px;
+
+}
+
+#chat{
+
+    height:300px;
+
+    overflow:auto;
+
+    background:#0f1115;
+
+    border-radius:14px;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+}
+
+.message{
+
+    margin-bottom:15px;
+
+    padding:12px;
+
+    border-radius:12px;
+
+}
+
+.user{
+
+    background:#2563eb;
+
+}
+
+.ai{
+
+    background:#222a38;
+
+}
+
+.aiBox button{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#3b82f6;
+
+    color:white;
+
+}
 </style>
 </head>
 <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/minecraft-4">
+<div class="aiBox">
+
+    <h2>MINEAI</h2>
+
+    <div id="chat"></div>
+
+    <input
+    type="text"
+    id="aiInput"
+    placeholder="質問してね！"
+    >
+
+    <button onclick="sendMessage()">
+    送信
+    </button>
+
+</div>
 <body>
 
 <header>
@@ -864,7 +948,56 @@ btn.innerHTML = "🌙";
 }
 
 }
+function sendMessage(){
 
+    const input =
+    document.getElementById("aiInput");
+
+    const chat =
+    document.getElementById("chat");
+
+    const text = input.value;
+
+    if(text.trim() === "") return;
+
+    chat.innerHTML += `
+    <div class="message user">
+    😎 ${text}
+    </div>
+    `;
+
+    let reply =
+    "まだ分からないかも！";
+
+    if(text.includes("ウォーデン")){
+        reply =
+        "わかったよ！<br><br>" +
+        "<code>/summon warden</code><br><br>" +
+        "で召喚できるよ😎";
+    }
+
+    if(text.includes("クリーパー")){
+        reply =
+        "クリーパーなら<br><br>" +
+        "<code>/summon creeper</code>";
+    }
+
+    setTimeout(()=>{
+
+        chat.innerHTML += `
+        <div class="message ai">
+        🤖 ${reply}
+        </div>
+        `;
+
+        chat.scrollTop =
+        chat.scrollHeight;
+
+    },700);
+
+    input.value = "";
+
+}
 </script>
 
 </body>
