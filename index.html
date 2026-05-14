@@ -590,10 +590,129 @@ body.light .id{
     color:white;
 
 }
+/* ===== AIボタン ===== */
+
+#openAiBtn{
+
+    position:fixed;
+
+    left:20px;
+    bottom:90px;
+
+    width:58px;
+    height:58px;
+
+    border:none;
+    border-radius:50%;
+
+    background:
+    linear-gradient(
+    135deg,
+    #8b5cf6,
+    #3b82f6);
+
+    color:white;
+
+    font-size:26px;
+
+    cursor:pointer;
+
+    z-index:9999;
+
+    box-shadow:
+    0 5px 20px rgba(59,130,246,0.5);
+
+    transition:0.25s;
+
+}
+
+#openAiBtn:hover{
+
+    transform:
+    scale(1.1)
+    rotate(10deg);
+
+}
+
+/* ===== AI画面 ===== */
+
+.aiBox{
+
+    position:fixed;
+
+    right:-450px;
+
+    top:0;
+
+    width:400px;
+
+    height:100vh;
+
+    margin-top:0;
+
+    border-radius:0;
+
+    z-index:9998;
+
+    transition:0.35s;
+
+    overflow:auto;
+
+    backdrop-filter:blur(12px);
+
+    background:
+    rgba(15,17,21,0.92);
+
+    border-left:
+    1px solid rgba(255,255,255,0.08);
+
+}
+
+.aiBox.open{
+
+    right:0;
+
+}
+
+/* ===== AIチャット ===== */
+
+#chat{
+
+    height:65vh;
+
+}
+
+/* ===== AIメッセージ ===== */
+
+.ai{
+
+    line-height:1.7;
+
+}
+
+/* ===== AI入力 ===== */
+
+#aiInput{
+
+    margin-top:10px;
+
+}
+
+/* ===== モバイル対応 ===== */
+
+@media(max-width:600px){
+
+    .aiBox{
+
+        width:100%;
+
+    }
+
+}
 </style>
 </head>
 <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/minecraft-4">
-<div class="aiBox">
+<div class="aiBox" id="aiBox">
 
     <h2>MINEAI</h2>
 
@@ -967,20 +1086,53 @@ function sendMessage(){
     `;
 
     let reply =
-    "まだ分からないかも！";
+   let reply =
+"ごめんね🥲 まだ分からないかも！";
 
-    if(text.includes("ウォーデン")){
-        reply =
-        "わかったよ！<br><br>" +
-        "<code>/summon warden</code><br><br>" +
-        "で召喚できるよ😎";
-    }
+if(
+text.includes("ウォーデン")
+){
 
-    if(text.includes("クリーパー")){
-        reply =
-        "クリーパーなら<br><br>" +
-        "<code>/summon creeper</code>";
-    }
+    reply =
+    "わかったよ！😎<br><br>" +
+
+    "ウォーデンを召喚するなら👇<br><br>" +
+
+    "<code>/summon warden</code>";
+
+}
+
+if(
+text.includes("100")
+){
+
+    reply +=
+    "<br><br>100体召喚したいなら、" +
+    "コマンドブロックを使うのがおすすめ🔥";
+
+}
+
+if(
+text.includes("クリーパー")
+){
+
+    reply =
+    "クリーパーなら👇<br><br>" +
+
+    "<code>/summon creeper</code>";
+
+}
+
+if(
+text.includes("最強の剣")
+){
+
+    reply =
+    "最強剣ならこれ😎🔥<br><br>" +
+
+    "<code>/give @p diamond_sword</code>";
+
+}
 
     setTimeout(()=>{
 
@@ -998,7 +1150,27 @@ function sendMessage(){
     input.value = "";
 
 }
-</script>
+document
+.getElementById("aiInput")
+.addEventListener("keypress", function(e){
 
+    if(e.key === "Enter"){
+        sendMessage();
+    }
+
+});
+function toggleAi(){
+
+    document
+    .getElementById("aiBox")
+    .classList
+    .toggle("open");
+
+}
+
+</script>
+<button id="openAiBtn" onclick="toggleAi()">
+🤖
+</button>
 </body>
 </html>
